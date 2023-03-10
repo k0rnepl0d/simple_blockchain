@@ -9,17 +9,17 @@ if not os.path.exists('blockchain'):
 
 blockchain = os.curdir + '/blockchain/'
 
-
+# ---Hash generation---
 def hash_gen(filename):
     file_ = open(blockchain + filename, 'rb').read()
     return hashlib.sha256(file_).hexdigest()
 
-
+# ---Getting the number of the last block in the chain---
 def get_files():
     files = os.listdir(blockchain)
     return sorted([int(i) for i in files])
 
-
+# ---Checking the integrity of the block chain---
 def check_chain():
     files = get_files()
     print(' ')
@@ -38,7 +38,7 @@ def check_chain():
 
         print(f'Block {prev_file} is: {res}')
 
-
+# ---Generation of a new block---
 def new_block(prev_hash=''):
     files = get_files()
     len_files = len(files)
@@ -77,7 +77,7 @@ def new_block(prev_hash=''):
             json.dump(data, f, indent=4, ensure_ascii=False)
         print('\nBlock generate')
 
-
+# ---Dialogue with the user---
 def main():
     while True:
         action = input('\nNew block(1) / Check chain(2): ')
